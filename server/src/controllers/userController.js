@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 exports.registerUser = async (req, res) => {
-    const { username, email, password, phone } = req.body;
+    const { username, email, password, telephone } = req.body;
 
     try {
         const userExist = await User.findOne({ email });
@@ -16,7 +16,7 @@ exports.registerUser = async (req, res) => {
             username,
             email,
             password: hashedPassword,
-            phone,
+            telephone,
             role: "user",
         });
         await newUser.save();
