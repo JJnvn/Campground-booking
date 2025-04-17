@@ -6,6 +6,7 @@ const userRoutes = require("./routes/userRoutes");
 const productRoutes = require("./routes/productRoute");
 const bookingRoutes = require("./routes/bookingRoutes");
 const adminRoutes = require("./routes/adminRoutes");
+const authMiddeware = require("./middleware/auth");
 
 const app = express();
 
@@ -19,7 +20,7 @@ app.use("/api", apiRouter);
 
 apiRouter.use("/users", userRoutes);
 // apiRouter.use("/products", productRoutes);
-// apiRouter.use("/bookings", bookingRoutes);
+apiRouter.use("/bookings", bookingRoutes);
 // apiRouter.use("/admin", adminRoutes);
 
 module.exports = app;
