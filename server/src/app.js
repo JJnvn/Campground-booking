@@ -21,6 +21,6 @@ app.use("/api", apiRouter);
 apiRouter.use("/users", userRoutes);
 // apiRouter.use("/products", productRoutes);
 apiRouter.use("/bookings", bookingRoutes);
-// apiRouter.use("/admin", adminRoutes);
+apiRouter.use("/admin", adminRoutes);
 
 module.exports = app;
