@@ -19,7 +19,7 @@ const apiRouter = express.Router();
 app.use("/api", apiRouter);
 
 apiRouter.use("/users", userRoutes);
-// apiRouter.use("/products", productRoutes);
+apiRouter.use("/products", productRoutes);
 apiRouter.use("/bookings", bookingRoutes);
 apiRouter.use("/admin", adminRoutes);
 
