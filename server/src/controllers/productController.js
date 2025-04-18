@@ -52,6 +52,7 @@ exports.getAllProducts = async (req, res) => {
       data: campground,
     });
   } catch (err) {
+    console.log(err);
     res.status(400).json({ success: false });
   }
 };
@@ -70,12 +71,8 @@ exports.getProductById = async (req, res) => {
 };
 
 exports.createProduct = async (req, res) => {
-  try {
-    const campground = await Campground.create(req.body);
-    res.status(201).json({ success: true, data: hospital });
-  } catch {
-    res.status(400).json({ success: false });
-  }
+  const campground = await Campground.create(req.body);
+  res.status(201).json({ success: true, data: campground });
 };
 
 exports.updateProduct = async (req, res) => {
