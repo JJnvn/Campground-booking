@@ -1,9 +1,11 @@
 const jwt = require("jsonwebtoken");
+const logger = require("../utils/logger");
 
 const authMiddleware = (req, res, next) => {
     const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith("Bearer ")) {
+        logger.error(`Authorization header missing or malformed`);
         return res.status(401).json({ message: "Unauthorized" });
     }
 
@@ -14,6 +16,7 @@ const authMiddleware = (req, res, next) => {
         req.user = decoded;
         next();
     } catch (err) {
+        logger.error(`Authentication error: ${err.message}`);
         return res.status(401).json({ message: "Invalid token" });
     }
 };
