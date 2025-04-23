@@ -6,6 +6,7 @@ const userController = require("../controllers/userController");
 const isAdmin = require("../middleware/isAdmin");
 
 router.post("/register", userController.registerAdmin);
+router.post("/login", userController.loginUser);
 
 router.use(authMiddleware, isAdmin);
 
