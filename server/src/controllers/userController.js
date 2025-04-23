@@ -141,9 +141,9 @@ exports.logoutUser = async (req, res) => {
 
 //admin function
 exports.registerAdmin = async (req, res) => {
-    const { name, email, password } = req.body;
+    const { username, email, password } = req.body;
 
-    if (!name || !email || !password) {
+    if (!username || !email || !password) {
         logger.warn("Register Admin: Missing required fields");
         return res.status(400).json({ message: "All fields are required" });
     }
