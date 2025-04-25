@@ -5,7 +5,6 @@ const authMiddleware = require("../middleware/auth");
 const clientCert = require("../middleware/clientCert");
 
 router.use(authMiddleware);
-router.use(clientCert);
 
 router.get("/", clientCert, productController.getAllProducts);
 router.get("/:id", productController.getProductById);
