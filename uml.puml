@@ -1,0 +1,112 @@
+@startuml
+skinparam class {
+  BackgroundColor WhiteSmoke
+  BorderColor DimGray
+  ArrowColor  DimGray
+}
+
+/' =========================================
+   APPLICATION
+========================================= '/
+class YakkingchayenCampGround <<Application>>
+
+/' =========================================
+   RESOURCES
+========================================= '/
+package "User Management" {
+  class UsersResource <<Resource>> {
+    «POST» +register(): User
+    «POST» +login(): Token
+    «GET»  +logout(): void
+  }
+
+  class AdminResource <<Resource>> {
+    «POST» +register(): User
+    «POST» +login(): Token
+    «GET»  +getAllBookings(): Booking[]
+  }
+
+  class AdminBookingResource <<Resource>> {
+    «GET»    +getBookingById(): Booking
+    «PUT»    +updateBooking(): Booking
+    «DELETE» +deleteBooking(): void
+  }
+}
+
+package "Campgrounds" {
+  class CampgroundsResource <<Resource>> {
+    «POST» +createProduct(): Campground
+    «GET»  +getAllProducts(): Campground[]
+  }
+
+  class CampgroundResource <<Resource>> {
+    «GET»    +getProductById(): Campground
+    «PUT»    +updateProduct(): Campground
+    «DELETE» +deleteProduct(): void
+  }
+}
+
+package "Bookings" {
+  class BookingsResource <<Resource>> {
+    «POST» +createBooking(): Booking
+    «GET»  +getAllBookings(): Booking[]
+  }
+
+  class BookingResource <<Resource>> {
+    «GET»    +getBookingById(): Booking
+    «PUT»    +updateBooking(): Booking
+    «DELETE» +deleteBooking(): void
+  }
+}
+
+/' =========================================
+   REPRESENTATIONS
+========================================= '/
+class User <<Representation>> {
+  _id: ObjectId
+  name: String
+  email: String
+  password: String
+  role: String
+  telephone: String
+}
+
+class Campground <<Representation>> {
+  _id: ObjectId
+  name: String
+  address: String
+  telephone: String
+}
+
+class Booking <<Representation>> {
+  _id: ObjectId
+  user: ObjectId
+  campGround: ObjectId
+  startDate: Date
+  nights: Number
+  status: String
+}
+
+/' =========================================
+   PATH RELATIONS
+========================================= '/
+YakkingchayenCampGround -[dashed]-> UsersResource          : /users\n<<Path>>
+YakkingchayenCampGround -[dashed]-> AdminResource          : /admin\n<<Path>>
+YakkingchayenCampGround -[dashed]-> CampgroundsResource    : /products\n<<Path>>
+YakkingchayenCampGround -[dashed]-> BookingsResource       : /bookings\n<<Path>>
+
+AdminResource     -[dashed]-> AdminBookingResource : /bookings/{id}\n<<Path>>
+CampgroundsResource -[dashed]-> CampgroundResource : /{id}\n<<Path>>
+BookingsResource  -[dashed]-> BookingResource      : /{id}\n<<Path>>
+
+/' =========================================
+   USE RELATIONS
+========================================= '/
+UsersResource        ..> User        : <<use>>
+AdminResource        ..> User        : <<use>>
+CampgroundResource   ..> Campground  : <<use>>
+CampgroundsResource  ..> Campground  : <<use>>
+BookingResource      ..> Booking     : <<use>>
+BookingsResource     ..> Booking     : <<use>>
+AdminBookingResource ..> Booking     : <<use>>
+@enduml
