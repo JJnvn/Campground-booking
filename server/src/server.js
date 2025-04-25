@@ -22,8 +22,8 @@ const httpsOpts = {
   cert: fs.readFileSync("./src/certs/server.crt"),
   ca: fs.readFileSync("./src/certs/rootCA.pem"),
   // ---- client-cert auth:
-  requestCert: true,
-  rejectUnauthorized: true, // bounce unknown certificates
+  requestCert: false,
+  rejectUnauthorized: false, // bounce unknown certificates
 };
 
 const PORT = process.env.PORT || 5003;
