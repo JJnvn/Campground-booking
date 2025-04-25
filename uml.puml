@@ -34,12 +34,12 @@ package "User Management" {
 }
 
 package "Campgrounds" {
-  class Campgrounds <<Resource>> {
+  class CampgroundsResource <<Resource>> {
     «POST» +createProduct(): Campground
     «GET»  +getAllProducts(): Campground[]
   }
 
-  class Campground <<Resource>> {
+  class CampgroundResource <<Resource>> {
     «GET»    +getProductById(): Campground
     «PUT»    +updateProduct(): Campground
     «DELETE» +deleteProduct(): void
@@ -47,12 +47,12 @@ package "Campgrounds" {
 }
 
 package "Bookings" {
-  class Bookings <<Resource>> {
+  class BookingsResource <<Resource>> {
     «POST» +createBooking(): Booking
     «GET»  +getAllBookings(): Booking[]
   }
 
-  class Booking <<Resource>> {
+  class BookingResource <<Resource>> {
     «GET»    +getBookingById(): Booking
     «PUT»    +updateBooking(): Booking
     «DELETE» +deleteBooking(): void
